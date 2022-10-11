@@ -81,9 +81,7 @@ if __name__ == "__main__":
     results = loop.run_until_complete(main_runner(
         send_req, MAIN_URL, 50))
 
-    for index, page in enumerate(results):
-        try:
-            master_list.extend(parse_html(page))
-        except:
-            print(f"An error has occurred while parsing page {index + 1}")
+    for page in results:
+        master_list.extend(parse_html(page))
+        
     write_data_to_excel(build_file_name(), master_list)
